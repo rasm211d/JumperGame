@@ -20,7 +20,7 @@ public class JumperFactory implements EntityFactory {
     public Entity newPlayer(SpawnData data) {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
-        physics.addGroundSensor(new HitBox("GROUND_SENSOR", new Point2D(20, 40), BoundingShape.box(60, 120)));
+        physics.addGroundSensor(new HitBox("GROUND_SENSOR", new Point2D(20, 20), BoundingShape.box(40, 40)));
 
         return entityBuilder()
                 .type(JumperType.PLAYER)
