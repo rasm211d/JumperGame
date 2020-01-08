@@ -36,19 +36,31 @@ public class JumperApp extends GameApplication {
             protected void onActionBegin() {
                 player.getComponent(PlayerComponent.class).jump();
             }
+
         }, KeyCode.SPACE);
 
         getInput().addAction(new UserAction("Right") {
             @Override
-            protected void onActionBegin() {
+            protected void onAction() {
                 player.getComponent(PlayerComponent.class).moveRight();
             }
+
+            @Override
+            protected void onActionEnd() {
+                player.getComponent(PlayerComponent.class).moveRightStop();
+            }
+
         }, KeyCode.RIGHT);
 
         getInput().addAction(new UserAction("Left") {
             @Override
-            protected void onActionBegin() {
+            protected void onAction() {
                 player.getComponent(PlayerComponent.class).moveLeft();
+            }
+
+            @Override
+            protected void onActionEnd() {
+                player.getComponent(PlayerComponent.class).moveLeftStop();
             }
         }, KeyCode.LEFT);
 

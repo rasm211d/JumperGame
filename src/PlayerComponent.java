@@ -2,6 +2,10 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import javafx.geometry.Point2D;
+
+import javax.xml.datatype.Duration;
+import java.util.Timer;
+
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class PlayerComponent extends Component {
@@ -27,27 +31,34 @@ public class PlayerComponent extends Component {
     public void moveLeft() {
         move = -1;
     }
+    public void moveLeftStop() {
+        move = 0;
+    }
 
     public void moveRight() {
         move = 1;
+    }
+
+    public void moveRightStop() {
+        move = 0;
     }
 
     public void jump() {
         if (jumps == 0) {
             return;
         } else if (move == -1) {
+            move = 0;
             physics.setVelocityY(-400);
             physics.setVelocityX(-200);
-            move = 0;
             jumps--;
         } else if (move == 1) {
+            move = 0;
             physics.setVelocityY(-400);
             physics.setVelocityX(200);
-            move = 0;
             jumps--;
         } else  {
-            physics.setVelocityY(-400);
             move = 0;
+            physics.setVelocityY(-400);
             jumps--;
         }
 
