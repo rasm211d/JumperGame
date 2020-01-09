@@ -48,17 +48,17 @@ public class PlayerComponent extends Component {
             return;
         } else if (move == -1) {
             move = 0;
-            physics.setVelocityY(-400);
+            physics.setVelocityY(-300);
             physics.setVelocityX(-200);
             jumps--;
         } else if (move == 1) {
             move = 0;
-            physics.setVelocityY(-400);
+            physics.setVelocityY(-300);
             physics.setVelocityX(200);
             jumps--;
         } else  {
             move = 0;
-            physics.setVelocityY(-400);
+            physics.setVelocityY(-300);
             jumps--;
         }
 

@@ -34,9 +34,12 @@ public class JumperApp extends GameApplication {
         getInput().addAction(new UserAction("Jump") {
             @Override
             protected void onActionBegin() {
-                player.getComponent(PlayerComponent.class).jump();
             }
 
+            @Override
+            protected void onActionEnd() {
+                player.getComponent(PlayerComponent.class).jump();
+            }
         }, KeyCode.SPACE);
 
         getInput().addAction(new UserAction("Right") {
