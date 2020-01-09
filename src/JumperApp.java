@@ -1,11 +1,13 @@
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.app.Viewport;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.time.LocalTimer;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.security.Key;
@@ -19,19 +21,24 @@ public class JumperApp extends GameApplication {
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
-        gameSettings.setWidth(70*16);
+        gameSettings.setWidth(16*70);
+        gameSettings.setHeight(1080);
     }
 
 
     @Override
     protected void initGame() {
+        getGameScene().setBackgroundColor(Color.SANDYBROWN);
         getGameWorld().addEntityFactory(new JumperFactory());
         setLevelFromMap("level0.tmx");
-        getPhysicsWorld().setGravity(0, 1500);
+        getPhysicsWorld().setGravity(0, 1000);
 
         player = getGameWorld().spawn("player", 70*8, 70*48);
 
-        getGameScene().getViewport().bindToEntity(player,getAppWidth()/2, getAppHeight()/2);
+        Viewport view = getGameScene().getViewport();
+        view.setBounds(0, 0, 15*70, 50*70);
+        view.bindToEntity(player, getAppWidth(), getAppHeight() - 200);
+
     }
 
     @Override

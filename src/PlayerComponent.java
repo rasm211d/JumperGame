@@ -1,9 +1,12 @@
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
+import com.almasb.fxgl.texture.AnimatedTexture;
+import com.almasb.fxgl.texture.AnimationChannel;
 import com.almasb.fxgl.time.LocalTimer;
 import com.almasb.fxgl.time.Timer;
 import javafx.geometry.Point2D;
+import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -14,14 +17,29 @@ public class PlayerComponent extends Component {
     private int jumps = 1;
     private long start;
     private long end;
+    private AnimationChannel animIdle, animJumpCharge, animJump;
+    private AnimatedTexture texture;
+
+    public PlayerComponent() {
+        Image image = image("JumperSprite.png");
+
+        animIdle = new AnimationChannel(image, 3, 60, 60, Duration.seconds(1), 0, 0);
+        animJumpCharge = new AnimationChannel(image, 3, 60, 60, Duration.seconds(1), 1, 1);
+        animJump = new AnimationChannel(image,3,60,60, Duration.seconds(1),2,2);
+
+        texture = new AnimatedTexture(animIdle);
+        texture.loop();
+    }
 
 
 
     @Override
     public void onAdded() {
         //entity.getTransformComponent().setScaleOrigin(new Point2D(30,30));
+        entity.getViewComponent().addChild(texture);
         physics.onGroundProperty().addListener((obs, old, isOnPlatform) -> {
             if (isOnPlatform) {
+                texture.loopAnimationChannel(animIdle);
                 physics.setVelocityX(0);
                 jumps = 1;
             }
@@ -42,6 +60,7 @@ public class PlayerComponent extends Component {
 
     public void jumpStart() {
         setStart(start);
+        texture.loopAnimationChannel(animJumpCharge);
     }
 
     public void setStart(long start) {
@@ -62,6 +81,7 @@ public class PlayerComponent extends Component {
 
     public void jumpEnd() {
         setEnd(end);
+        texture.loopAnimationChannel(animJump);
 
         if (jumps == 0) {
             return;

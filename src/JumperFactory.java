@@ -28,7 +28,7 @@ public class JumperFactory implements EntityFactory {
         return entityBuilder()
                 .type(JumperType.PLAYER)
                 .from(data)
-                .viewWithBBox(new Rectangle(60, 60, Color.BLACK))
+                .bbox(new HitBox(BoundingShape.box(60, 60)))
                 .with(physics)
                 .with(new CollidableComponent(true))
                 .with(new PlayerComponent())
