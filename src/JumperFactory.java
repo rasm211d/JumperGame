@@ -46,6 +46,17 @@ public class JumperFactory implements EntityFactory {
 
     }
 
+    @Spawns("door")
+    public Entity newDoor(SpawnData data) {
+        return entityBuilder()
+                .type(JumperType.DOOR)
+                .from(data)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new CollidableComponent(true))
+                .build();
+
+    }
+
     @Spawns("wall")
     public Entity newWall(SpawnData data) {
         return entityBuilder()

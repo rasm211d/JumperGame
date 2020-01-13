@@ -28,7 +28,7 @@ public class JumperApp extends GameApplication {
 
     @Override
     protected void initGame() {
-        getGameScene().setBackgroundColor(Color.SANDYBROWN);
+        getGameScene().setBackgroundColor(Color.LIGHTBLUE);
         getGameWorld().addEntityFactory(new JumperFactory());
         setLevelFromMap("level0.tmx");
         getPhysicsWorld().setGravity(0, 1000);
@@ -54,6 +54,13 @@ public class JumperApp extends GameApplication {
             @Override
             protected void onCollisionBegin(Entity player, Entity loft) {
                 player.getComponent(PlayerComponent.class).bounceLoft();
+            }
+        });
+
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(JumperType.PLAYER, JumperType.DOOR) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity door) {
+                getDisplay().showMessageBox("Level Complete!", () -> System.out.println("Dialog Closed"));
             }
         });
 

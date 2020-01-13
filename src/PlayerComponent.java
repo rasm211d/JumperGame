@@ -1,3 +1,4 @@
+import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
@@ -48,6 +49,7 @@ public class PlayerComponent extends Component {
 
 
     public void moveLeft() {
+        getEntity().setScaleX(-1);
         move = -1;
     }
     public void moveStop() {
@@ -55,6 +57,7 @@ public class PlayerComponent extends Component {
     }
 
     public void moveRight() {
+        getEntity().setScaleX(1);
         move = 1;
     }
 
@@ -90,10 +93,10 @@ public class PlayerComponent extends Component {
             if ((getEnd()-getStart())/1.2 <= 1500) {
                 physics.setVelocityY(-(getEnd()-getStart())/1.2);
                 System.out.println((getEnd()-getStart())/1.2);
-                physics.setVelocityX(-350);
+                physics.setVelocityX(-300);
             } else {
                 physics.setVelocityY(-1500);
-                physics.setVelocityX(-350);
+                physics.setVelocityX(-300);
             }
             jumps--;
         } else if (move == 1) {
@@ -101,10 +104,10 @@ public class PlayerComponent extends Component {
             if ((getEnd()-getStart())/1.2 <= 1500) {
                 physics.setVelocityY(-(getEnd()-getStart())/1.2);
                 System.out.println((getEnd()-getStart())/1.2);
-                physics.setVelocityX(350);
+                physics.setVelocityX(300);
             } else {
                 physics.setVelocityY(-1500);
-                physics.setVelocityX(350);
+                physics.setVelocityX(300);
             }
             jumps--;
         } else  {
@@ -115,15 +118,23 @@ public class PlayerComponent extends Component {
             } else {
                 physics.setVelocityY(-1500);
             }
-            physics.setVelocityY(-(getEnd()-getStart()));
-            System.out.println((getEnd()-getStart()));
+            //physics.setVelocityY(-(getEnd()-getStart()));
+            //System.out.println((getEnd()-getStart()));
             jumps--;
         }
 
     }
 
     public void bounce() {
+        /*if (physics.getVelocityX() > 0) {
+            getEntity().setScaleX(-1);
+            physics.setVelocityX(-physics.getVelocityX());
+        } else if (physics.getVelocityX() < 0) {
+            getEntity().setScaleX(1);
+            physics.setVelocityX(-physics.getVelocityX());
+        }*/
         physics.setVelocityX(-physics.getVelocityX());
+
     }
 
     public void bounceLoft() {
