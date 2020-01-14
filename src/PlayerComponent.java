@@ -82,6 +82,8 @@ public class PlayerComponent extends Component {
         return end;
     }
 
+
+
     public void jumpEnd() {
         setEnd(end);
         texture.loopAnimationChannel(animJump);
@@ -103,7 +105,6 @@ public class PlayerComponent extends Component {
             move = 0;
             if ((getEnd()-getStart())/1.2 <= 1500) {
                 physics.setVelocityY(-(getEnd()-getStart())/1.2);
-                System.out.println((getEnd()-getStart())/1.2);
                 physics.setVelocityX(300);
             } else {
                 physics.setVelocityY(-1500);
@@ -114,7 +115,6 @@ public class PlayerComponent extends Component {
             move = 0;
             if ((getEnd()-getStart())/1.2 <= 1500) {
                 physics.setVelocityY(-(getEnd()-getStart())/1.2);
-                System.out.println((getEnd()-getStart())/1.2);
             } else {
                 physics.setVelocityY(-1500);
             }
@@ -124,9 +124,16 @@ public class PlayerComponent extends Component {
         }
 
     }
-
+    /** Denne metode returnere manden med samme hastighed som han rammer en væg med, dog i modsat retning */
     public void bounce() {
-        /*if (physics.getVelocityX() > 0) {
+        /*if (getEntity().getScaleX() == 1) {
+            physics.setVelocityX(-physics.getVelocityX());
+            getEntity().setScaleX(1);
+        } else {
+            physics.setVelocityX(-physics.getVelocityX());
+            getEntity().setScaleX(-1);
+        }
+        if (physics.getVelocityX() > 0) {
             getEntity().setScaleX(-1);
             physics.setVelocityX(-physics.getVelocityX());
         } else if (physics.getVelocityX() < 0) {
@@ -139,7 +146,8 @@ public class PlayerComponent extends Component {
 
     public void bounceLoft() {
         physics.setVelocityX(physics.getVelocityX());
-        System.out.println(physics.getVelocityX());
+        //physics.setVelocityY(-physics.getVelocityY()); Denne returnere manden med samme hastighed nedad som han rammer loftet med
+        //System.out.println(physics.getVelocityX());
     }
 
 }

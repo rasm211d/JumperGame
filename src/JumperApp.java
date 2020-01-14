@@ -22,7 +22,7 @@ public class JumperApp extends GameApplication {
     @Override
     protected void initSettings(GameSettings gameSettings) {
         gameSettings.setWidth(16*70);
-        gameSettings.setHeight(1080);
+        gameSettings.setHeight(1000);
     }
 
 
