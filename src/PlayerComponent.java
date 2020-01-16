@@ -82,6 +82,10 @@ public class PlayerComponent extends Component {
         return end;
     }
 
+    public long getDifference() {
+        return getEnd()-getStart();
+    }
+
 
 
     public void jumpEnd() {
@@ -92,9 +96,9 @@ public class PlayerComponent extends Component {
             return;
         } else if (move == -1) {
             move = 0;
-            if ((getEnd()-getStart())/1.2 <= 1500) {
-                physics.setVelocityY(-(getEnd()-getStart())/1.2);
-                System.out.println((getEnd()-getStart())/1.2);
+            if (getDifference()/1.2 <= 1500) {
+                physics.setVelocityY(-getDifference()/1.2);
+                System.out.println(getDifference()/1.2);
                 physics.setVelocityX(-300);
             } else {
                 physics.setVelocityY(-1500);
@@ -103,7 +107,7 @@ public class PlayerComponent extends Component {
             jumps--;
         } else if (move == 1) {
             move = 0;
-            if ((getEnd()-getStart())/1.2 <= 1500) {
+            if (getDifference()/1.2 <= 1500) {
                 physics.setVelocityY(-(getEnd()-getStart())/1.2);
                 physics.setVelocityX(300);
             } else {
@@ -113,8 +117,8 @@ public class PlayerComponent extends Component {
             jumps--;
         } else  {
             move = 0;
-            if ((getEnd()-getStart())/1.2 <= 1500) {
-                physics.setVelocityY(-(getEnd()-getStart())/1.2);
+            if (getDifference()/1.2 <= 1500) {
+                physics.setVelocityY(-getDifference()/1.2);
             } else {
                 physics.setVelocityY(-1500);
             }
@@ -146,6 +150,7 @@ public class PlayerComponent extends Component {
 
     public void bounceLoft() {
         physics.setVelocityX(physics.getVelocityX());
+        physics.setVelocityY(-(physics.getVelocityY()/2));
         //physics.setVelocityY(-physics.getVelocityY()); Denne returnere manden med samme hastighed nedad som han rammer loftet med
         //System.out.println(physics.getVelocityX());
     }
