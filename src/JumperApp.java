@@ -44,7 +44,7 @@ public class JumperApp extends GameApplication {
     protected void initGame() {
         getGameScene().setBackgroundColor(Color.LIGHTBLUE);
         getGameWorld().addEntityFactory(new JumperFactory());
-        setLevelFromMap("level"+(+1)+".tmx");
+        setLevelFromMap("level1.tmx");
         getPhysicsWorld().setGravity(0, 1000);
 
         player = getGameWorld().spawn("player", 70*8, 70*48);
