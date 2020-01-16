@@ -1,28 +1,42 @@
-import com.almasb.fxgl.app.GameApplication;
-import com.almasb.fxgl.app.GameSettings;
-import com.almasb.fxgl.app.Viewport;
+import com.almasb.fxgl.app.*;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.level.Level;
+import com.almasb.fxgl.entity.level.tiled.TMXLevelLoader;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
+import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.time.LocalTimer;
+import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.security.Key;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class JumperApp extends GameApplication {
+    private static final boolean DEVELOPING_NEW_LEVEL = true;
+    private static final int MAX_LEVEL = 20;
     private Entity player;
     private PlayerComponent playerComponent;
 
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
-        gameSettings.setWidth(16*70);
+        gameSettings.setWidth(1120);
         gameSettings.setHeight(1000);
+        gameSettings.setTitle("Jumper");
+        gameSettings.setVersion("1.0");
+        gameSettings.setMenuEnabled(true);
+        gameSettings.setSceneFactory(new SceneFactory() {
+            @Override
+            public FXGLMenu newMainMenu() {
+                return new JumperMainMenu();
+            }
+        });
     }
 
 
@@ -30,7 +44,7 @@ public class JumperApp extends GameApplication {
     protected void initGame() {
         getGameScene().setBackgroundColor(Color.LIGHTBLUE);
         getGameWorld().addEntityFactory(new JumperFactory());
-        setLevelFromMap("level0.tmx");
+        setLevelFromMap("level"+(+1)+".tmx");
         getPhysicsWorld().setGravity(0, 1000);
 
         player = getGameWorld().spawn("player", 70*8, 70*48);
@@ -61,6 +75,8 @@ public class JumperApp extends GameApplication {
             @Override
             protected void onCollisionBegin(Entity player, Entity door) {
                 getDisplay().showMessageBox("Level Complete!", () -> System.out.println("Dialog Closed"));
+                getGameWorld().spawn("player", 70*8, 70*48);
+
             }
         });
 
@@ -107,6 +123,57 @@ public class JumperApp extends GameApplication {
         }, KeyCode.LEFT);
 
     }
+
+    /*private void nextLevel() {
+        if (geti("level") == MAX_LEVEL) {
+            getDisplay().showMessageBox("You finished the game!");
+            return;
+        }
+
+        if (!DEVELOPING_NEW_LEVEL) {
+            inc("level" , +1);
+        }
+        setLevel(geti("level"));
+
+    }
+
+    private boolean isRelease() {
+        return getSettings().getApplicationMode() == ApplicationMode.RELEASE;
+    }
+
+    private void setLevel(int levelNum) {
+        if (player != null) {
+            player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 50));
+            player.setZ(Integer.MAX_VALUE);
+
+        }
+
+        set("levelTime", 0.0);
+
+        var levelFile = new File("level0.tmx");
+
+        Level level;
+
+        // this supports hot reloading of levels during development
+        if (!isRelease() && DEVELOPING_NEW_LEVEL && levelFile.exists()) {
+            System.out.println("Loading from development level");
+
+            try {
+                level = new TMXLevelLoader().load(levelFile.toURI().toURL(), getGameWorld());
+                getGameWorld().setLevel(level);
+
+                System.out.println("Success");
+
+            } catch (Exception e) {
+                level = setLevelFromMap("tmx/level" + levelNum  + ".tmx");
+            }
+        } else {
+            level = setLevelFromMap("tmx/level" + levelNum  + ".tmx");
+        }
+
+    }
+
+     */
 
     public static void main(String[] args) {
         launch(args) ;
