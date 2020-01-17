@@ -15,6 +15,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class PlayerComponent extends Component {
     private PhysicsComponent physics;
     private int move = 0;
+    private int isJump = 0;
     private int jumps = 1;
     private long start;
     private long end;
@@ -54,6 +55,7 @@ public class PlayerComponent extends Component {
     }
     public void moveStop() {
         move = 0;
+        isJump = 0;
     }
 
     public void moveRight() {
@@ -64,6 +66,7 @@ public class PlayerComponent extends Component {
     public void jumpStart() {
         setStart(start);
         texture.loopAnimationChannel(animJumpCharge);
+
     }
 
     public void setStart(long start) {

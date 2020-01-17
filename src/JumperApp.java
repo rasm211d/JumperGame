@@ -1,7 +1,9 @@
 import com.almasb.fxgl.app.*;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.entity.level.Level;
+import com.almasb.fxgl.entity.level.text.TextLevelLoader;
 import com.almasb.fxgl.entity.level.tiled.TMXLevelLoader;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
@@ -36,12 +38,25 @@ public class JumperApp extends GameApplication {
             public FXGLMenu newMainMenu() {
                 return new JumperMainMenu();
             }
+            @Override
+            public FXGLMenu newGameMenu() {
+                return new JumperGameMenu();
+            }
+
         });
+        gameSettings.setDeveloperMenuEnabled(false);
     }
 
 
     @Override
     protected void initGame() {
+        /*TMXLevelLoader loader = new TMXLevelLoader();
+        Level level = loader.parse();
+        getGameWorld().setLevel(level);*/
+
+
+
+
         getGameScene().setBackgroundColor(Color.LIGHTBLUE);
         getGameWorld().addEntityFactory(new JumperFactory());
         setLevelFromMap("level1.tmx");
@@ -123,6 +138,7 @@ public class JumperApp extends GameApplication {
         }, KeyCode.LEFT);
 
     }
+
 
     /*private void nextLevel() {
         if (geti("level") == MAX_LEVEL) {

@@ -1,39 +1,38 @@
 import com.almasb.fxgl.app.FXGLMenu;
 import com.almasb.fxgl.app.MenuType;
-import com.almasb.fxgl.dsl.FXGL;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.concurrent.RecursiveAction;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-public class JumperMainMenu extends FXGLMenu {
-    public JumperMainMenu() {
-        super(MenuType.MAIN_MENU);
+public class JumperGameMenu extends FXGLMenu {
 
-        double centerX = getAppWidth() / 2 - 200 / 2;
+    public JumperGameMenu() {
+        super(MenuType.GAME_MENU);
+
+        double centerX = getAppWidth() / 2 - 300 / 2;
         double centerY = getAppHeight()/2;
 
-        var start = new JumperButton("Start New Game", () -> this.fireNewGame());
-        start.setTranslateX(centerX);
-        start.setTranslateY(centerY - 100);
+        var mainMenu = new JumperButton("Return to main menu", () -> this.fireExitToMainMenu());
+        mainMenu.setTranslateX(centerX);
+        mainMenu.setTranslateY(centerY);
 
-        var exit = new JumperButton("Exit", () -> this.fireExit());
-        exit.setTranslateX(centerX);
-        exit.setTranslateY(centerY - 40);
+        var text = getUIFactory().newText("Game Paused", Color.WHITE, 24);
+        text.setUnderline(true);
+        text.setTranslateX(centerX + 75);
+        text.setTranslateY(centerY - 400);
 
-        getMenuContentRoot().getChildren().addAll(start, exit);
+        getMenuContentRoot().getChildren().addAll(mainMenu, text);
+
 
     }
+
 
     @Override
     protected Button createActionButton(StringBinding stringBinding, Runnable runnable) {
@@ -64,10 +63,9 @@ public class JumperMainMenu extends FXGLMenu {
     protected Node createVersionView(String s) {
         return new Text();
     }
-
     public static class JumperButton extends StackPane {
         public JumperButton(String name, Runnable action) {
-            var bg = new Rectangle(200, 40, Color.BLACK);
+            var bg = new Rectangle(300, 40, Color.BLACK);
             bg.setStroke(Color.WHITE);
 
             var text = getUIFactory().newText(name, Color.WHITE, 24);
