@@ -1,4 +1,5 @@
 import com.almasb.fxgl.app.*;
+import com.almasb.fxgl.audio.Sound;
 import com.almasb.fxgl.core.collection.PropertyMap;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
@@ -76,8 +77,10 @@ public class JumperApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(JumperType.PLAYER, JumperType.WALL) {
             @Override
             protected void onCollisionBegin(Entity player, Entity wall) {
+                play("bounce.wav");
                 player.getComponent(PlayerComponent.class).bounce();
             }
+
         });
 
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(JumperType.PLAYER, JumperType.LOFT) {
@@ -120,6 +123,7 @@ public class JumperApp extends GameApplication {
 
             @Override
             protected void onActionEnd() {
+                play("jump.wav");
                 player.getComponent(PlayerComponent.class).jumpEnd();
             }
         }, KeyCode.SPACE);
