@@ -1,4 +1,5 @@
 import com.almasb.fxgl.app.*;
+import com.almasb.fxgl.core.collection.PropertyMap;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
@@ -90,10 +91,21 @@ public class JumperApp extends GameApplication {
             @Override
             protected void onCollisionBegin(Entity player, Entity door) {
                 getDisplay().showMessageBox("Level Complete!", () -> System.out.println("Dialog Closed"));
-                getGameWorld().spawn("player", 70*8, 70*48);
+                PropertyMap propertyMap = door.getProperties();
+                setLevel(propertyMap.getString("nextlevel"));
+                //getGameWorld().spawn("player", 70*8, 70*48);
 
             }
         });
+
+    }
+    protected void setLevel(String level) {
+        setLevelFromMap(level);
+        player = getGameWorld().spawn("player", 70*8, 70*48);
+
+        Viewport view = getGameScene().getViewport();
+        view.setBounds(0, 0, 15*70, 50*70);
+        view.bindToEntity(player, getAppWidth(), getAppHeight() - 200);
 
     }
 

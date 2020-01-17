@@ -98,7 +98,11 @@
   <object id="90" type="loft" x="71.5" y="833.167" width="137" height="10"/>
   <object id="91" type="loft" x="422.833" y="553.667" width="274.333" height="10"/>
   <object id="92" type="loft" x="493.871" y="342.833" width="555.545" height="10"/>
-  <object id="94" type="door" x="910" y="140" width="70" height="140"/>
+  <object id="94" type="door" x="910" y="140" width="70" height="140">
+   <properties>
+    <property name="nextlevel" value="level2.tmx"/>
+   </properties>
+  </object>
   <object id="95" type="wall" x="487.455" y="281.091" width="7.27273" height="68"/>
   <object id="98" type="wall" x="207.364" y="491.25" width="7.27273" height="68"/>
   <object id="99" type="wall" x="906.364" y="490.5" width="7.27273" height="68"/>

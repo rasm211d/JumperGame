@@ -19,16 +19,20 @@ public class JumperGameMenu extends FXGLMenu {
         double centerX = getAppWidth() / 2 - 300 / 2;
         double centerY = getAppHeight()/2;
 
-        var mainMenu = new JumperButton("Return to main menu", () -> this.fireExitToMainMenu());
-        mainMenu.setTranslateX(centerX);
-        mainMenu.setTranslateY(centerY);
+        var mainMenuButton = new JumperButton("Return to main menu", () -> this.fireExitToMainMenu());
+        mainMenuButton.setTranslateX(centerX);
+        mainMenuButton.setTranslateY(centerY);
+
+        var restartButton = new JumperButton("Restart game", () -> this.fireNewGame());
+        restartButton.setTranslateX(centerX);
+        restartButton.setTranslateY(centerY - 60);
 
         var text = getUIFactory().newText("Game Paused", Color.WHITE, 24);
         text.setUnderline(true);
         text.setTranslateX(centerX + 75);
         text.setTranslateY(centerY - 400);
 
-        getMenuContentRoot().getChildren().addAll(mainMenu, text);
+        getMenuContentRoot().getChildren().addAll(mainMenuButton, restartButton, text);
 
 
     }

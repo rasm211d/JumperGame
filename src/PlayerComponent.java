@@ -101,7 +101,6 @@ public class PlayerComponent extends Component {
             move = 0;
             if (getDifference()/1.2 <= 1500) {
                 physics.setVelocityY(-getDifference()/1.2);
-                System.out.println(getDifference()/1.2);
                 physics.setVelocityX(-300);
             } else {
                 physics.setVelocityY(-1500);
