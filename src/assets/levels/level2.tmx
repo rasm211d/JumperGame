@@ -89,7 +89,7 @@
   <object id="39" type="loft" x="632.792" y="2376.25" width="276.416" height="5.5"/>
   <object id="40" type="wall" x="905" y="2312" width="6.25" height="67.5"/>
   <object id="41" type="wall" x="838.125" y="2521.25" width="6.25" height="67.5"/>
-  <object id="42" type="loft" x="631.133" y="2516.98" width="67.916" height="4.22727"/>
+  <object id="42" type="loft" x="631.133" y="2516.98" width="68.6035" height="4.22727"/>
   <object id="43" type="loft" x="842.542" y="2587.55" width="208.916" height="4.22727"/>
   <object id="44" type="wall" x="418.602" y="1891.49" width="6.25" height="67.5"/>
   <object id="45" type="loft" x="422.792" y="1956.33" width="208.416" height="5.5"/>

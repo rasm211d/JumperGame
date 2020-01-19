@@ -1,23 +1,15 @@
 import com.almasb.fxgl.app.*;
-import com.almasb.fxgl.audio.Sound;
 import com.almasb.fxgl.core.collection.PropertyMap;
-import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.GameWorld;
-import com.almasb.fxgl.entity.level.Level;
-import com.almasb.fxgl.entity.level.text.TextLevelLoader;
-import com.almasb.fxgl.entity.level.tiled.TMXLevelLoader;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
-import com.almasb.fxgl.physics.PhysicsComponent;
-import com.almasb.fxgl.time.LocalTimer;
-import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
+
 
 import java.io.File;
-import java.security.Key;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
@@ -26,6 +18,7 @@ public class JumperApp extends GameApplication {
     private static final int MAX_LEVEL = 20;
     private Entity player;
     private PlayerComponent playerComponent;
+
 
 
     @Override
@@ -86,6 +79,7 @@ public class JumperApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(JumperType.PLAYER, JumperType.LOFT) {
             @Override
             protected void onCollisionBegin(Entity player, Entity loft) {
+                play("bounce.wav");
                 player.getComponent(PlayerComponent.class).bounceLoft();
             }
         });
