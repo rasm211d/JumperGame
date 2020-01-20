@@ -1,5 +1,7 @@
 import com.almasb.fxgl.app.FXGLMenu;
 import com.almasb.fxgl.app.MenuType;
+import com.almasb.fxgl.core.collection.PropertyMap;
+import com.almasb.fxgl.entity.SpawnData;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.scene.Node;
@@ -26,6 +28,8 @@ public class JumperGameMenu extends FXGLMenu {
         var restartButton = new JumperButton("Restart game", () -> this.fireNewGame());
         restartButton.setTranslateX(centerX);
         restartButton.setTranslateY(centerY - 60);
+
+        //var restartLevelButton = new JumperMainMenu.JumperButton("Restart Level", () -> )
 
         var text = getUIFactory().newText("Game Paused", Color.WHITE, 24);
         text.setUnderline(true);

@@ -99,30 +99,30 @@ public class PlayerComponent extends Component {
             return;
         } else if (move == -1) {
             move = 0;
-            if (getDifference()/1.2 <= 1500) {
+            if (getDifference()/1.2 <= 1000) {
                 physics.setVelocityY(-getDifference()/1.2);
                 physics.setVelocityX(-300);
             } else {
-                physics.setVelocityY(-1500);
+                physics.setVelocityY(-1000);
                 physics.setVelocityX(-300);
             }
             jumps--;
         } else if (move == 1) {
             move = 0;
-            if (getDifference()/1.2 <= 1500) {
+            if (getDifference()/1.2 <= 1000) {
                 physics.setVelocityY(-(getEnd()-getStart())/1.2);
                 physics.setVelocityX(300);
             } else {
-                physics.setVelocityY(-1500);
+                physics.setVelocityY(-1000);
                 physics.setVelocityX(300);
             }
             jumps--;
         } else  {
             move = 0;
-            if (getDifference()/1.2 <= 1500) {
+            if (getDifference()/1.2 <= 1000) {
                 physics.setVelocityY(-getDifference()/1.2);
             } else {
-                physics.setVelocityY(-1500);
+                physics.setVelocityY(-1000);
             }
             //physics.setVelocityY(-(getEnd()-getStart()));
             //System.out.println((getEnd()-getStart()));

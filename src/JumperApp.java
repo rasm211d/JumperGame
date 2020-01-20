@@ -18,6 +18,7 @@ public class JumperApp extends GameApplication {
     private static final int MAX_LEVEL = 20;
     private Entity player;
     private PlayerComponent playerComponent;
+    private double color = 0.0;
 
 
 
@@ -45,14 +46,7 @@ public class JumperApp extends GameApplication {
 
     @Override
     protected void initGame() {
-        /*TMXLevelLoader loader = new TMXLevelLoader();
-        Level level = loader.parse();
-        getGameWorld().setLevel(level);*/
-
-
-
-
-        getGameScene().setBackgroundColor(Color.LIGHTBLUE);
+        getGameScene().setBackgroundColor(Color.rgb(0, 0, 255, color));
         getGameWorld().addEntityFactory(new JumperFactory());
         setLevelFromMap("level1.tmx");
         getPhysicsWorld().setGravity(0, 1000);
@@ -87,6 +81,7 @@ public class JumperApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(JumperType.PLAYER, JumperType.DOOR) {
             @Override
             protected void onCollisionBegin(Entity player, Entity door) {
+                color = color + 0.1;
                 getDisplay().showMessageBox("Level Complete!", () -> System.out.println("Dialog Closed"));
                 PropertyMap propertyMap = door.getProperties();
                 setLevel(propertyMap.getString("nextlevel"));
@@ -97,6 +92,7 @@ public class JumperApp extends GameApplication {
 
     }
     protected void setLevel(String level) {
+        getGameScene().setBackgroundColor(Color.rgb(0, 0, 255, color));
         setLevelFromMap(level);
         player = getGameWorld().spawn("player", 70*8, 70*48);
 
