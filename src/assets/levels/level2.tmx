@@ -126,7 +126,7 @@
   <object id="98" type="wall" x="343.636" y="702.318" width="8.72727" height="349.364"/>
   <object id="99" type="wall" x="768.386" y="910.068" width="8.72727" height="211.864"/>
   <object id="100" type="loft" x="632.167" y="906" width="139.166" height="5.5"/>
-  <object id="101" type="wall" x="628.136" y="841.568" width="8.72727" height="66.864"/>
+  <object id="101" type="wall" x="628.761" y="842.443" width="8.72727" height="66.864"/>
   <object id="102" type="platform" x="629.757" y="840.364" width="209.758" height="70"/>
   <object id="103" type="wall" x="768.386" y="700.985" width="8.72727" height="141.197"/>
   <object id="104" type="platform" x="770" y="700" width="281.091" height="70"/>

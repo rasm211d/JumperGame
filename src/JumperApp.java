@@ -4,12 +4,8 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
 import javafx.scene.input.KeyCode;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
-
-import java.io.File;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
@@ -18,9 +14,16 @@ public class JumperApp extends GameApplication {
     private static final int MAX_LEVEL = 20;
     private Entity player;
     private PlayerComponent playerComponent;
-    private double color = 0.0;
+    private double color = 0.1;
+    private String level = "level1.tmx";
 
+    public void setLevelString(String level) {
+        this.level = level;
+    }
 
+    public String getLevelString() {
+        return level;
+    }
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
@@ -44,11 +47,13 @@ public class JumperApp extends GameApplication {
     }
 
 
+
     @Override
     protected void initGame() {
-        getGameScene().setBackgroundColor(Color.rgb(0, 0, 255, color));
+        getGameScene().setBackgroundColor(Color.rgb(0, 0, 0, color));
         getGameWorld().addEntityFactory(new JumperFactory());
-        setLevelFromMap("level1.tmx");
+        //setLevelString(getLevelString());
+        setLevelFromMap(getLevelString());
         getPhysicsWorld().setGravity(0, 1000);
 
         player = getGameWorld().spawn("player", 70*8, 70*48);
@@ -81,9 +86,10 @@ public class JumperApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(JumperType.PLAYER, JumperType.DOOR) {
             @Override
             protected void onCollisionBegin(Entity player, Entity door) {
-                color = color + 0.1;
+                color = color + 0.05;
                 getDisplay().showMessageBox("Level Complete!", () -> System.out.println("Dialog Closed"));
                 PropertyMap propertyMap = door.getProperties();
+                setLevelString(propertyMap.getString("nextlevel"));
                 setLevel(propertyMap.getString("nextlevel"));
                 //getGameWorld().spawn("player", 70*8, 70*48);
 
@@ -92,7 +98,9 @@ public class JumperApp extends GameApplication {
 
     }
     protected void setLevel(String level) {
-        getGameScene().setBackgroundColor(Color.rgb(0, 0, 255, color));
+        player.removeFromWorld();
+        getGameScene().setBackgroundColor(Color.rgb(0, 0, 0, color));
+        level = getLevelString();
         setLevelFromMap(level);
         player = getGameWorld().spawn("player", 70*8, 70*48);
 

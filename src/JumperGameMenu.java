@@ -1,7 +1,5 @@
 import com.almasb.fxgl.app.FXGLMenu;
 import com.almasb.fxgl.app.MenuType;
-import com.almasb.fxgl.core.collection.PropertyMap;
-import com.almasb.fxgl.entity.SpawnData;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.scene.Node;
@@ -14,6 +12,7 @@ import javafx.scene.text.Text;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class JumperGameMenu extends FXGLMenu {
+    JumperApp jumperApp = new JumperApp();
 
     public JumperGameMenu() {
         super(MenuType.GAME_MENU);
@@ -25,7 +24,13 @@ public class JumperGameMenu extends FXGLMenu {
         mainMenuButton.setTranslateX(centerX);
         mainMenuButton.setTranslateY(centerY);
 
-        var restartButton = new JumperButton("Restart game", () -> this.fireNewGame());
+
+        /*String salt = jumperApp.getLevelString();
+        var restartLevelButton = new JumperButton("Restart level", () -> jumperApp.setLevel(salt));
+        restartLevelButton.setTranslateX(centerX);
+        restartLevelButton.setTranslateY(centerY - 120);*/
+
+        var restartButton = new JumperButton("Restart level", () -> this.fireNewGame());
         restartButton.setTranslateX(centerX);
         restartButton.setTranslateY(centerY - 60);
 
@@ -85,4 +90,5 @@ public class JumperGameMenu extends FXGLMenu {
             getChildren().addAll(bg, text);
         }
     }
+
 }

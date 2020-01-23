@@ -101,6 +101,7 @@
   <object id="94" type="door" x="910" y="140" width="70" height="140">
    <properties>
     <property name="nextlevel" value="level2.tmx"/>
+    <property name="thislevel" value="level1.tmx"/>
    </properties>
   </object>
   <object id="95" type="wall" x="487.455" y="281.091" width="7.27273" height="68"/>
