@@ -23,7 +23,7 @@ public class JumperMainMenu extends FXGLMenu {
         double centerX = getAppWidth() / 2 - 200 / 2;
         double centerY = getAppHeight()/2;
 
-        var start = new JumperButton("Start New Game", () -> this.fireNewGame());
+        var start = new JumperButton("Start Game", () -> this.fireNewGame());
         start.setTranslateX(centerX);
         start.setTranslateY(centerY - 100);
 

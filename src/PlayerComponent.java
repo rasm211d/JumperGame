@@ -4,9 +4,6 @@ import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
-import com.almasb.fxgl.time.LocalTimer;
-import com.almasb.fxgl.time.Timer;
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
@@ -110,7 +107,7 @@ public class PlayerComponent extends Component {
         } else if (move == 1) {
             move = 0;
             if (getDifference()/1.2 <= 1000) {
-                physics.setVelocityY(-(getEnd()-getStart())/1.2);
+                physics.setVelocityY(-getDifference()/1.2);
                 physics.setVelocityX(300);
             } else {
                 physics.setVelocityY(-1000);
@@ -132,29 +129,13 @@ public class PlayerComponent extends Component {
     }
     /** Denne metode returnere manden med samme hastighed som han rammer en væg med, dog i modsat retning */
     public void bounce() {
-        /*if (getEntity().getScaleX() == 1) {
-            physics.setVelocityX(-physics.getVelocityX());
-            getEntity().setScaleX(1);
-        } else {
-            physics.setVelocityX(-physics.getVelocityX());
-            getEntity().setScaleX(-1);
-        }
-        if (physics.getVelocityX() > 0) {
-            getEntity().setScaleX(-1);
-            physics.setVelocityX(-physics.getVelocityX());
-        } else if (physics.getVelocityX() < 0) {
-            getEntity().setScaleX(1);
-            physics.setVelocityX(-physics.getVelocityX());
-        }*/
-        physics.setVelocityX(-physics.getVelocityX());
+        physics.setVelocityX(-physics.getVelocityX()/1.2);
 
     }
 
     public void bounceLoft() {
         physics.setVelocityX(physics.getVelocityX());
         physics.setVelocityY(-(physics.getVelocityY()/2));
-        //physics.setVelocityY(-physics.getVelocityY()); Denne returnere manden med samme hastighed nedad som han rammer loftet med
-        //System.out.println(physics.getVelocityX());
     }
 
 }

@@ -13,6 +13,7 @@ public class JumperApp extends GameApplication {
     private static final boolean DEVELOPING_NEW_LEVEL = true;
     private static final int MAX_LEVEL = 20;
     private Entity player;
+    private Entity text;
     private PlayerComponent playerComponent;
     private double color = 0.1;
     private String level = "level1.tmx";
@@ -52,11 +53,12 @@ public class JumperApp extends GameApplication {
     protected void initGame() {
         getGameScene().setBackgroundColor(Color.rgb(0, 0, 0, color));
         getGameWorld().addEntityFactory(new JumperFactory());
-        //setLevelString(getLevelString());
         setLevelFromMap(getLevelString());
         getPhysicsWorld().setGravity(0, 1000);
 
         player = getGameWorld().spawn("player", 70*8, 70*48);
+        //text = getGameWorld().spawn("text", 687.50, 3197.83);
+
 
         Viewport view = getGameScene().getViewport();
         view.setBounds(0, 0, 15*70, 50*70);
@@ -91,7 +93,6 @@ public class JumperApp extends GameApplication {
                 PropertyMap propertyMap = door.getProperties();
                 setLevelString(propertyMap.getString("nextlevel"));
                 setLevel(propertyMap.getString("nextlevel"));
-                //getGameWorld().spawn("player", 70*8, 70*48);
 
             }
         });
@@ -152,58 +153,6 @@ public class JumperApp extends GameApplication {
         }, KeyCode.LEFT);
 
     }
-
-
-    /*private void nextLevel() {
-        if (geti("level") == MAX_LEVEL) {
-            getDisplay().showMessageBox("You finished the game!");
-            return;
-        }
-
-        if (!DEVELOPING_NEW_LEVEL) {
-            inc("level" , +1);
-        }
-        setLevel(geti("level"));
-
-    }
-
-    private boolean isRelease() {
-        return getSettings().getApplicationMode() == ApplicationMode.RELEASE;
-    }
-
-    private void setLevel(int levelNum) {
-        if (player != null) {
-            player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 50));
-            player.setZ(Integer.MAX_VALUE);
-
-        }
-
-        set("levelTime", 0.0);
-
-        var levelFile = new File("level0.tmx");
-
-        Level level;
-
-        // this supports hot reloading of levels during development
-        if (!isRelease() && DEVELOPING_NEW_LEVEL && levelFile.exists()) {
-            System.out.println("Loading from development level");
-
-            try {
-                level = new TMXLevelLoader().load(levelFile.toURI().toURL(), getGameWorld());
-                getGameWorld().setLevel(level);
-
-                System.out.println("Success");
-
-            } catch (Exception e) {
-                level = setLevelFromMap("tmx/level" + levelNum  + ".tmx");
-            }
-        } else {
-            level = setLevelFromMap("tmx/level" + levelNum  + ".tmx");
-        }
-
-    }
-
-     */
 
     public static void main(String[] args) {
         launch(args) ;

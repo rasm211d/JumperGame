@@ -40,7 +40,6 @@ public class JumperFactory implements EntityFactory {
     @Spawns("platform")
     public Entity newPlatform(SpawnData data) {
         return entityBuilder()
-
                 .from(data)
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new PhysicsComponent())
@@ -78,6 +77,14 @@ public class JumperFactory implements EntityFactory {
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new PhysicsComponent())
                 .with(new CollidableComponent(true))
+                .build();
+    }
+
+    @Spawns("text")
+    public Entity newText(SpawnData data) {
+        return entityBuilder()
+                .type(JumperType.TEXT)
+                .from(data)
                 .build();
     }
 }

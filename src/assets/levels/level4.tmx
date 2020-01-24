@@ -24,7 +24,7 @@
 153,0,0,0,0,0,0,0,0,0,0,0,0,0,0,153,
 153,0,0,0,0,0,101,0,0,0,0,0,0,0,0,153,
 153,0,0,0,0,0,153,0,0,101,0,0,0,0,0,153,
-153,0,0,0,0,0,153,0,0,153,0,0,101,0,0,153,
+153,0,0,0,0,0,153,0,0,153,0,101,101,0,0,153,
 153,0,0,0,0,0,153,0,0,153,0,0,0,0,0,153,
 153,0,0,0,0,0,153,0,0,0,0,0,0,0,0,153,
 153,0,0,0,0,0,0,0,0,0,0,0,0,0,0,153,
@@ -126,17 +126,17 @@
   <object id="170" type="loft" x="420.5" y="1536.75" width="68.6063" height="4.22647"/>
   <object id="171" type="wall" x="484" y="1194.38" width="7" height="345.167"/>
   <object id="172" type="platform" x="420" y="1190" width="69.455" height="70"/>
-  <object id="173" type="wall" x="630" y="1265" width="7" height="205.667"/>
-  <object id="174" type="wall" x="694" y="1264.38" width="7" height="206.167"/>
+  <object id="173" type="wall" x="630" y="1262.09" width="7" height="208.576"/>
+  <object id="174" type="wall" x="694" y="1261.83" width="7" height="208.712"/>
   <object id="175" type="loft" x="631.5" y="1467.75" width="68.6063" height="4.22647"/>
   <object id="176" type="platform" x="630" y="1260" width="69.455" height="70"/>
   <object id="177" type="wall" x="840" y="1610.54" width="7" height="227.917"/>
   <object id="178" type="wall" x="904.75" y="1610.67" width="7" height="222.584"/>
   <object id="179" type="platform" x="841.25" y="1610" width="69.455" height="214.667"/>
-  <object id="180" type="wall" x="840" y="1331.71" width="7" height="67.894"/>
-  <object id="181" type="platform" x="840.951" y="1330" width="69.455" height="70"/>
+  <object id="180" type="wall" x="769.091" y="1330.62" width="7" height="67.894"/>
+  <object id="181" type="platform" x="769.678" y="1330" width="140.728" height="70"/>
   <object id="182" type="wall" x="904.201" y="1331.17" width="7" height="68.6212"/>
-  <object id="183" type="loft" x="841.697" y="1396.61" width="68.6063" height="4.22647"/>
+  <object id="183" type="loft" x="770.424" y="1396.61" width="139.879" height="4.22647"/>
   <object id="184" type="platform" x="630.188" y="2170.19" width="139.455" height="70"/>
   <object id="185" type="loft" x="631.802" y="2236.91" width="137.773" height="4.22647"/>
   <object id="186" type="wall" x="764.02" y="2171.23" width="7" height="67.9167"/>
