@@ -7,15 +7,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
 
+import java.time.Duration;
+import java.util.Map;
+
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class JumperApp extends GameApplication {
-    private static final boolean DEVELOPING_NEW_LEVEL = true;
-    private static final int MAX_LEVEL = 20;
     private Entity player;
     private Entity text;
     private PlayerComponent playerComponent;
-    private double color = 0.1;
+    private double color = 0.3;
     private String level = "level1.tmx";
 
     public void setLevelString(String level) {
@@ -46,7 +47,6 @@ public class JumperApp extends GameApplication {
         });
         gameSettings.setDeveloperMenuEnabled(false);
     }
-
 
 
     @Override
@@ -88,17 +88,38 @@ public class JumperApp extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(JumperType.PLAYER, JumperType.DOOR) {
             @Override
             protected void onCollisionBegin(Entity player, Entity door) {
-                color = color + 0.05;
-                getDisplay().showMessageBox("Level Complete!", () -> System.out.println("Dialog Closed"));
                 PropertyMap propertyMap = door.getProperties();
                 setLevelString(propertyMap.getString("nextlevel"));
-                setLevel(propertyMap.getString("nextlevel"));
+                color = color + 0.05;
+                if (getLevelString().charAt(5) == '7') {
+                    getDisplay().showMessageBox("Game Complete");
+                } else {
+                    getDisplay().showMessageBox("Level Complete!", () -> System.out.println("Dialog Closed"));
+                    setLevel(propertyMap.getString("nextlevel"));
+
+                }
+
 
             }
         });
-
     }
+
+    /*@Override
+    protected void initGameVars(Map<String, Object> vars) {
+        vars.put("time", 0.0);
+    }
+    @Override
+    protected void initUI() {
+        addVarText(50,50, "time");
+    }
+
+    @Override
+    protected void onUpdate(double tpf) {
+        inc("time", tpf);
+    }*/
+
     protected void setLevel(String level) {
+        //set("time", 0.0);
         player.removeFromWorld();
         getGameScene().setBackgroundColor(Color.rgb(0, 0, 0, color));
         level = getLevelString();
