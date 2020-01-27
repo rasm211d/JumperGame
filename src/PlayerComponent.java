@@ -11,6 +11,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class PlayerComponent extends Component {
     private PhysicsComponent physics;
+    private IndicatorComponent indicatorComponent;
     private int move = 0;
     private int isJump = 0;
     private int jumps = 1;

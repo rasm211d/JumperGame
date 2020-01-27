@@ -12,7 +12,6 @@ import javafx.scene.text.Text;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class JumperGameMenu extends FXGLMenu {
-    JumperApp jumperApp = new JumperApp();
 
     public JumperGameMenu() {
         super(MenuType.GAME_MENU);

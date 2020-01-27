@@ -14,8 +14,6 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class JumperApp extends GameApplication {
     private Entity player;
-    private Entity text;
-    private PlayerComponent playerComponent;
     private double color = 0.3;
     private String level = "level1.tmx";
 
@@ -104,22 +102,26 @@ public class JumperApp extends GameApplication {
         });
     }
 
-    /*@Override
+    @Override
     protected void initGameVars(Map<String, Object> vars) {
-        vars.put("time", 0.0);
+        vars.put("time", 0);
+
     }
     @Override
     protected void initUI() {
-        addVarText(50,50, "time");
+        var jump = new Jumpindicator(player.getComponent(IndicatorComponent.class));
+        addVarText(30,30, "time");
+        addUINode(jump, getAppWidth() - 100, 5);
+
     }
 
-    @Override
+    /*@Override
     protected void onUpdate(double tpf) {
-        inc("time", tpf);
+        inc("time", );
+
     }*/
 
     protected void setLevel(String level) {
-        //set("time", 0.0);
         player.removeFromWorld();
         getGameScene().setBackgroundColor(Color.rgb(0, 0, 0, color));
         level = getLevelString();
