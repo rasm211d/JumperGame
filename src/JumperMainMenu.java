@@ -17,13 +17,15 @@ import java.util.concurrent.RecursiveAction;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class JumperMainMenu extends FXGLMenu {
+    JumperApp jumperApp = new JumperApp();
     public JumperMainMenu() {
         super(MenuType.MAIN_MENU);
 
-        double centerX = getAppWidth() / 2 - 200 / 2;
-        double centerY = getAppHeight()/2;
+        double centerX = getAppWidth() / 2.0 - 200 / 2.0;
+        double centerY = getAppHeight()/2.0;
 
         var start = new JumperButton("Start Game", () -> this.fireNewGame());
+
         start.setTranslateX(centerX);
         start.setTranslateY(centerY - 100);
 
@@ -78,5 +80,6 @@ public class JumperMainMenu extends FXGLMenu {
 
             getChildren().addAll(bg, text);
         }
+
     }
 }

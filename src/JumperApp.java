@@ -3,12 +3,13 @@ import com.almasb.fxgl.core.collection.PropertyMap;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
+import com.almasb.fxgl.physics.PhysicsComponent;
+
+import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-
-import java.time.Duration;
 import java.util.Map;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -52,6 +53,10 @@ public class JumperApp extends GameApplication {
         gameSettings.setDeveloperMenuEnabled(false);
     }
 
+    @Override
+    protected void onPreInit() {
+        getSettings().setGlobalSoundVolume(0.1);
+    }
 
     @Override
     protected void initGame() {
@@ -96,7 +101,7 @@ public class JumperApp extends GameApplication {
                 setLevelString(propertyMap.getString("nextlevel"));
                 color = color + 0.05;
                 if (getLevelString().charAt(5) == '7') {
-                    getDisplay().showMessageBox("Game Complete");
+                    getDisplay().showMessageBox("Game Complete!");
                 } else {
                     getDisplay().showMessageBox("Level Complete!", () -> System.out.println("Dialog Closed"));
                     setLevel(propertyMap.getString("nextlevel"));
@@ -129,7 +134,7 @@ public class JumperApp extends GameApplication {
         outer.setStroke(Color.BLACK);
         inner.setStroke(Color.RED.brighter());
         inner.setFill(Color.RED);
-        addVarText(30,30, "time");
+        addVarText("time",30, 30);
 
         addUINode(inner, getAppWidth() / 2 - 150, getAppHeight() - 100);
 
@@ -139,12 +144,23 @@ public class JumperApp extends GameApplication {
         player.removeFromWorld();
         getGameScene().setBackgroundColor(Color.rgb(0, 0, 0, color));
         level = getLevelString();
-        setLevelFromMap(level);
+        setLevelFromMap(getLevelString());
         player = getGameWorld().spawn("player", 70*8, 70*48);
 
         Viewport view = getGameScene().getViewport();
         view.setBounds(0, 0, 15*70, 50*70);
         view.bindToEntity(player, getAppWidth(), getAppHeight() - 200);
+
+    }
+
+    protected void restartLevel () {
+        setLevelFromMap(getLevelString());
+
+        if (player != null) {
+            player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(70*8, 70*48));
+            player.setZ(Integer.MAX_VALUE);
+        }
+        getGameScene().setBackgroundColor(Color.rgb(0, 0, 0, color));
 
     }
 
