@@ -62,7 +62,7 @@ public class JumperApp extends GameApplication {
     protected void initGame() {
         getGameScene().setBackgroundColor(Color.rgb(0, 0, 0, color));
         getGameWorld().addEntityFactory(new JumperFactory());
-        setLevelFromMap(getLevelString());
+        setLevelFromMap("level1.tmx");
         getPhysicsWorld().setGravity(0, 1000);
 
         player = getGameWorld().spawn("player", 70*8, 70*48);
@@ -103,12 +103,11 @@ public class JumperApp extends GameApplication {
                 if (getLevelString().charAt(5) == '7') {
                     getDisplay().showMessageBox("Game Complete!");
                 } else {
-                    getDisplay().showMessageBox("Level Complete!", () -> System.out.println("Dialog Closed"));
-                    setLevel(propertyMap.getString("nextlevel"));
-
+                    getDisplay().showMessageBox("Level Complete!", () -> {
+                        System.out.println("Dialog Closed");
+                        setLevel();
+                    });
                 }
-
-
             }
         });
     }
@@ -140,29 +139,16 @@ public class JumperApp extends GameApplication {
 
     }
 
-    protected void setLevel(String level) {
-        player.removeFromWorld();
-        getGameScene().setBackgroundColor(Color.rgb(0, 0, 0, color));
-        level = getLevelString();
-        setLevelFromMap(getLevelString());
-        player = getGameWorld().spawn("player", 70*8, 70*48);
+    protected void setLevel() {
+            if (player != null) {
+                player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(70*8, 70*48));
+                player.setZ(Integer.MAX_VALUE);
 
-        Viewport view = getGameScene().getViewport();
-        view.setBounds(0, 0, 15*70, 50*70);
-        view.bindToEntity(player, getAppWidth(), getAppHeight() - 200);
-
+            }
+            getGameScene().setBackgroundColor(Color.rgb(0, 0, 0, color));
+            setLevelFromMap(getLevelString());
     }
 
-    protected void restartLevel () {
-        setLevelFromMap(getLevelString());
-
-        if (player != null) {
-            player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(70*8, 70*48));
-            player.setZ(Integer.MAX_VALUE);
-        }
-        getGameScene().setBackgroundColor(Color.rgb(0, 0, 0, color));
-
-    }
 
     @Override
     protected void initInput() {

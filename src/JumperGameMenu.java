@@ -1,5 +1,6 @@
 import com.almasb.fxgl.app.FXGLMenu;
 import com.almasb.fxgl.app.MenuType;
+import com.almasb.fxgl.dsl.FXGL;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.scene.Node;
@@ -24,7 +25,10 @@ public class JumperGameMenu extends FXGLMenu {
         mainMenuButton.setTranslateX(centerX);
         mainMenuButton.setTranslateY(centerY);
 
-        var restartButton = new JumperButton("Restart level", () -> jumperApp.restartLevel());
+        var restartButton = new JumperButton("Restart level", () -> {
+            this.getController().gotoPlay();
+            FXGL.<JumperApp>getAppCast().setLevel();
+        });
         restartButton.setTranslateX(centerX);
         restartButton.setTranslateY(centerY - 60);
 
