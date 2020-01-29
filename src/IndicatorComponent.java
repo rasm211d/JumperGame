@@ -1,12 +1,18 @@
 import com.almasb.fxgl.entity.components.IntegerComponent;
 
 public class IndicatorComponent extends IntegerComponent {
-    private final int maxJumpTime;
+    private int maxJumpTime;
+    private int minJumpTime;
+    private PlayerComponent playerComponent = new PlayerComponent();
 
     IndicatorComponent() {
-        int jumpTime = (int) new PlayerComponent().getEnd();
-        maxJumpTime = jumpTime;
+        this.maxJumpTime = (int) playerComponent.getDifference();
+        this.minJumpTime = (int) playerComponent.getStart();
 
+    }
+
+    public int getMinJumpTime() {
+        return minJumpTime;
     }
 
     public int getMaxJumpTime() {

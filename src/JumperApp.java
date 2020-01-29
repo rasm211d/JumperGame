@@ -5,6 +5,7 @@ import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 
 import java.time.Duration;
@@ -15,7 +16,12 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class JumperApp extends GameApplication {
     private Entity player;
     private double color = 0.3;
+    public static int hpInX = 15;
+    public static int hpInY = 35;
     private String level = "level1.tmx";
+    private Rectangle inner = new Rectangle(hpInX, hpInY, 0, 40);
+    //private PlayerComponent playerComponent = new PlayerComponent();
+
 
     public void setLevelString(String level) {
         this.level = level;
@@ -107,19 +113,27 @@ public class JumperApp extends GameApplication {
         vars.put("time", 0);
 
     }
-    @Override
-    protected void initUI() {
-        var jump = new Jumpindicator(player.getComponent(IndicatorComponent.class));
-        addVarText(30,30, "time");
-        addUINode(jump, getAppWidth() - 100, 5);
 
+
+    protected void onUpdate(double tpf) {
+    PlayerComponent playerComponent = new PlayerComponent();
+        if (playerComponent.getDifference() > 0) {
+            inner.setWidth(playerComponent.getDifference()/3.33);
+            addUINode(inner, getAppWidth() / 2 - 150, getAppHeight() - 100);
+        }
     }
 
-    /*@Override
-    protected void onUpdate(double tpf) {
-        inc("time", );
+    @Override
+    protected void initUI() {
+        var outer = new javafx.scene.shape.Rectangle();
+        outer.setStroke(Color.BLACK);
+        inner.setStroke(Color.RED.brighter());
+        inner.setFill(Color.RED);
+        addVarText(30,30, "time");
 
-    }*/
+        addUINode(inner, getAppWidth() / 2 - 150, getAppHeight() - 100);
+
+    }
 
     protected void setLevel(String level) {
         player.removeFromWorld();
