@@ -135,7 +135,7 @@ public class JumperApp extends GameApplication {
         inner.setFill(Color.RED);
         addVarText("time",30, 30);
 
-        addUINode(inner, getAppWidth() / 2 - 150, getAppHeight() - 100);
+        //addUINode(inner, getAppWidth() / 2 - 150, getAppHeight() - 100);
 
     }
 
